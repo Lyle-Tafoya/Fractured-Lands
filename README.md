@@ -14,3 +14,5 @@ Fractured Lands relies on epoll, and as such, can only be built on Linux
     make
 
 When you run Fractured Lands, the active directory must be the project root, as this is necessary for it to find various files such as welcome.txt
+
+Fractured Lands expects to find a mongodb instance at mongodb://localhost:27017
