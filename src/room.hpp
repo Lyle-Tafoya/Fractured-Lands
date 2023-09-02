@@ -1,10 +1,12 @@
 #ifndef FRACTURED_LANDS_ROOM_HPP_
 #define FRACTURED_LANDS_ROOM_HPP_
 
-#include "creature.hpp"
-  class Creature;
+#include <cstdint>
 #include <forward_list>
+#include <string>
 #include <string_view>
+
+class Creature;
 
 enum room_type : uint8_t
 {

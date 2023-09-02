@@ -8,6 +8,8 @@
 
 #include "commands.hpp"
 #include "colors.hpp"
+#include "connection_info.hpp"
+#include "creature.hpp"
 #include "mongo_controller.hpp"
 #include "player.hpp"
 #include "server.hpp"
@@ -24,6 +26,10 @@ extern DatabaseController database_controller;
 std::string Player::playerWelcomeText;
 std::unordered_map<int, Player *> Player::lookupPlayerByFileDescriptor;
 std::unordered_map<std::string, Player *> Player::lookupPlayerByName;
+std::list<Player *> Player::immortals;
+std::list<Player *> Player::lords;
+std::list<Player *> Player::guildLeaders;
+std::list<Player *> Player::peasants;
 
 const std::unordered_map<std::string, std::string> Player::prompt_templates =
 {
@@ -252,9 +258,7 @@ void Player::handleColorCheckInput(Player &player)
   }
   database_controller.createPlayer(player);
 
-  player.body->broadcastToRoom(fmt::format("{} enters the game.\r\n", player.name));
-  player.body->doCommand("look", "");
-  player.showPrompt();
+  player.enterWorld();
 }
 
 void Player::handleGameInput(Player &player)
@@ -347,9 +351,7 @@ void Player::handleExistingPasswordInput(Player &player)
 
   player.connection->inputQueue.pop();
 
-  player.body->broadcastToRoom(fmt::format("{} enters the game.\r\n", player.name));
-  player.body->doCommand("look", "");
-  player.showPrompt();
+  player.enterWorld();
 }
 
 bool Player::load()
@@ -437,6 +439,14 @@ void Player::handleClosePlayerConnection(int fd)
   Player *player = lookupPlayerByFileDescriptor[fd];
   lookupPlayerByFileDescriptor.erase(fd);
   lookupPlayerByName.erase(player->getName());
+  if(player->wizardLevel > 0)
+  {
+    immortals.remove(player);
+  }
+  else
+  {
+    peasants.remove(player);
+  }
   delete player;
 }
 
@@ -499,4 +509,19 @@ void Player::handleNewPlayerConnection(int fd)
 
   ConnectionInfo *connection = new ConnectionInfo(fd);
   ConnectionInfo::lookupConnectionInfoByFileDescriptor[fd] = connection;
+}
+
+void Player::enterWorld()
+{
+  body->broadcastToRoom(fmt::format("{} enters the game.\r\n", name));
+  if(wizardLevel > 0)
+  {
+    immortals.emplace_back(this);
+  }
+  else
+  {
+    peasants.emplace_back(this);
+  }
+  body->doCommand("look", "");
+  showPrompt();
 }

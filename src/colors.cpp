@@ -18,7 +18,7 @@ const std::unordered_map<char,std::string_view> COLOR_MAP =
   { 'c', COLOR_FAINT_CYAN },
   { 'C', COLOR_BRIGHT_CYAN },
   { 'w', COLOR_WHITE },
-  { 'W', COLOR_BRIGHT_WHITE },
+  { 'W', COLOR_BRIGHT_WHITE }
 };
 
 void colorizeText(std::string &str)

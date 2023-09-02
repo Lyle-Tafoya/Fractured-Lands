@@ -4,11 +4,10 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <cstdint>
 
-#include "player.hpp"
-  class Player;
-#include "room.hpp"
-  class Room;
+class Room;
+class Player;
 
 class Creature
 {

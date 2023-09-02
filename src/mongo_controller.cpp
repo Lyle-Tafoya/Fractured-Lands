@@ -4,6 +4,9 @@
 #include <cstring>
 #include <bsoncxx/builder/stream/document.hpp>
 #include "mongo_controller.hpp"
+#include "creature.hpp"
+#include "player.hpp"
+#include "room.hpp"
 
 extern std::shared_ptr<spdlog::logger> logger;
 

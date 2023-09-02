@@ -2,7 +2,8 @@
 #define FRACTURED_LANDS_CONNECTION_INFO_HPP_
 
 #include <queue>
-#include "player.hpp"
+#include <string>
+#include <unordered_map>
 
 class Player;
 

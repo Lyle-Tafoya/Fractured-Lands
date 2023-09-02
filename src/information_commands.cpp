@@ -1,4 +1,6 @@
 #include "creature.hpp"
+#include "player.hpp"
+#include "room.hpp"
 #include <list>
 
 extern const std::string_view action_string(Creature::combat_action a);
@@ -401,4 +403,42 @@ void Player::promptCommand(Creature &creature, std::string_view argument)
       creature.soul->prompt = kv->second;
     }
   }
+}
+
+void Player::whoCommand(Creature &creature, std::string_view)
+{
+  std::string message = "                     Fractured Lands Players\r\n\r\n";
+  if(!immortals.empty())
+  {
+    message += " Immortals\r\n";
+    for(const auto *player : immortals)
+    {
+      message += "                  " + player->name + " " + player->title + "\r\n";
+    }
+  }
+  if(!lords.empty())
+  {
+    message += " Lords\r\n";
+    for(const auto *player : immortals)
+    {
+      message += "                  " + player->name + " " + player->title + "\r\n";
+    }
+  }
+  if(!guildLeaders.empty())
+  {
+    message += " Guild Leaders\r\n";
+    for(const auto *player : guildLeaders)
+    {
+      message += "                  " + player->name + " " + player->title + "\r\n";
+    }
+  }
+  if(!peasants.empty())
+  {
+    message += " Peasants\r\n";
+    for(const auto *player : peasants)
+    {
+      message += "                  " + player->name + " " + player->title + "\r\n";
+    }
+  }
+  creature.soul->receiveMessage(message);
 }

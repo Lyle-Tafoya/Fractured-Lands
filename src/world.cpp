@@ -1,4 +1,5 @@
 #include "perlin.hpp"
+#include "room.hpp"
 #include "world.hpp"
 
 World::World(const worldgen_info &world_data, const std::vector<mapgen_info> &map_data)

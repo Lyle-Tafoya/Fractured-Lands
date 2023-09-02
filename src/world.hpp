@@ -6,12 +6,10 @@
 #include <unordered_map>
 #include <list>
 #include <vector>
-
-#include "creature.hpp"
-  class Creature;
-#include "room.hpp"
-  class Room;
 #include "vec4.h"
+
+class Room;
+enum room_type : uint8_t;
 
 struct worldgen_info
 {

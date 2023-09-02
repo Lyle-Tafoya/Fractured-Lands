@@ -1,5 +1,7 @@
 #include <fmt/core.h>
 #include "player.hpp"
+#include "creature.hpp"
+#include "room.hpp"
 #include "server.hpp"
 
 extern Server server;

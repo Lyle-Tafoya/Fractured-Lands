@@ -1,5 +1,7 @@
 #include "commands.hpp"
 #include "creature.hpp"
+#include "player.hpp"
+#include "room.hpp"
 #include "world.hpp"
   extern World world;
 #include <set>

@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <string>
 
-#include "creature.hpp"
+class Creature;
 
 extern std::unordered_map<std::string, std::function<void(Creature &, std::string_view)>> commandMap;
 

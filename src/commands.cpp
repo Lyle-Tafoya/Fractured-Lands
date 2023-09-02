@@ -1,20 +1,22 @@
 #include "creature.hpp"
+#include "player.hpp"
 #include <string_view>
 #include <functional>
 
 std::unordered_map<std::string, std::function<void(Creature &, std::string_view)>> commandMap
 ({
     // Information Commands
+    { "brief", Player::briefCommand },
     { "l", Player::lookCommand },
     { "lo", Player::lookCommand },
     { "loo", Player::lookCommand },
     { "look", Player::lookCommand },
+    { "prompt", Player::promptCommand },
     { "sc", Player::scoreCommand },
     { "sco", Player::scoreCommand },
     { "scor", Player::scoreCommand },
     { "score", Player::scoreCommand },
-    { "prompt", Player::promptCommand },
-    { "brief", Player::briefCommand },
+    { "who", Player::whoCommand },
     // Map commands
     { "areamap", Player::areamapCommand },
     { "minimap", Player::minimapCommand },

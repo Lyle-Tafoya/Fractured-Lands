@@ -5,8 +5,10 @@
 #include <mongocxx/instance.hpp>
 #include <string_view>
 #include <optional>
-#include "player.hpp"
-#include "creature.hpp"
+
+class Creature;
+class Player;
+class Room;
 
 class DatabaseController
 {

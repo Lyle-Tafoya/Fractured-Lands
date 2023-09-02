@@ -1,5 +1,7 @@
 #include "colors.hpp"
 #include "creature.hpp"
+#include "player.hpp"
+#include "room.hpp"
 #include "world.hpp"
 #include "vec4.h"
 #include <string>
