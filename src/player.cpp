@@ -448,17 +448,20 @@ void Player::handleUsernameInput(ConnectionInfo &connection)
 void Player::handleClosePlayerConnection(int fd)
 {
   Player *player = lookupPlayerByFileDescriptor[fd];
-  lookupPlayerByFileDescriptor.erase(fd);
-  lookupPlayerByName.erase(player->getName());
-  if(player->wizardLevel > 0)
+  if(player)
   {
-    immortals.remove(player);
+    lookupPlayerByFileDescriptor.erase(fd);
+    lookupPlayerByName.erase(player->getName());
+    if(player->wizardLevel > 0)
+    {
+      immortals.remove(player);
+    }
+    else
+    {
+      peasants.remove(player);
+    }
+    delete player;
   }
-  else
-  {
-    peasants.remove(player);
-  }
-  delete player;
 }
 
 void Player::handleExistingPlayerConnection(int fd, std::string input)
