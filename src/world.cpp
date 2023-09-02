@@ -359,13 +359,13 @@ Room *World::generateRoomInfo(uint64_t room_id)
 
   if(coordinates.z == terrain[coordinates.x][coordinates.y].height && coordinates.z >= sea_level)
   {
-    uint16_t tmp = (coordinates.x-1) % width;
+    uint16_t tmp = coordinates.x == 0 ? width-1 : coordinates.x-1;
     room.exits.emplace_front("west", flattenCoordinates({tmp, coordinates.y, std::max(terrain[tmp][coordinates.y].height, sea_level), coordinates.w}));
     tmp = (coordinates.x+1) % width;
     room.exits.emplace_front("east", flattenCoordinates({tmp, coordinates.y, std::max(terrain[tmp][coordinates.y].height, sea_level), coordinates.w}));
     tmp = (coordinates.y+1) % length;
     room.exits.emplace_front("south", flattenCoordinates({coordinates.x, tmp, std::max(terrain[coordinates.x][tmp].height, sea_level), coordinates.w}));
-    tmp = (coordinates.y-1) % length;
+    tmp = coordinates.y == 0 ? length-1 : coordinates.y-1;
     room.exits.emplace_front("north", flattenCoordinates({coordinates.x, tmp, std::max(terrain[coordinates.x][tmp].height, sea_level), coordinates.w}));
     if(terrain_type == FOREST || terrain_type == JUNGLE)
     {
@@ -388,7 +388,7 @@ Room *World::generateRoomInfo(uint64_t room_id)
     {
       room.exits.emplace_front("up", flattenCoordinates({coordinates.x, coordinates.y, tmp, coordinates.w}));
     }
-    tmp = (coordinates.x-1) % width;
+    tmp = coordinates.x == 0 ? width-1 : coordinates.x-1;
     if(coordinates.z >= terrain[tmp][coordinates.y].height)
     {
       room.exits.emplace_front("west", flattenCoordinates({tmp, coordinates.y, coordinates.z, coordinates.w}));
@@ -403,7 +403,7 @@ Room *World::generateRoomInfo(uint64_t room_id)
     {
       room.exits.emplace_front("south", flattenCoordinates({coordinates.x, tmp, coordinates.z, coordinates.w}));
     }
-    tmp = (coordinates.y-1) % length;
+    tmp = coordinates.y == 0 ? length-1 : coordinates.y-1;
     if(coordinates.z >= terrain[coordinates.x][tmp].height)
     {
       room.exits.emplace_front("north", flattenCoordinates({coordinates.x, tmp, coordinates.z, coordinates.w}));

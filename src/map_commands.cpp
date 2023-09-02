@@ -79,12 +79,14 @@ void Player::areamapCommand(Creature &creature, std::string_view)
       if(x == scaled_x && y == scaled_y)
       {
         areamap += COLOR_BRIGHT_MAGENTA;
-        areamap .push_back('@');
+        areamap.push_back('@');
       }
       else
       {
-        areamap += Room::base_rooms[map_data->tiles[x][y]].color_code;
-        areamap.push_back(Room::base_rooms[map_data->tiles[x][y]].symbol);
+        int tile_x = x < 0 ? x + map_data->width : x % map_data->width;
+        int tile_y = y < 0 ? y + map_data->height : y % map_data->height;
+        areamap += Room::base_rooms[map_data->tiles[tile_x][tile_y]].color_code;
+        areamap.push_back(Room::base_rooms[map_data->tiles[tile_x][tile_y]].symbol);
       }
     }
     areamap += "\r\n";
@@ -111,8 +113,10 @@ void Player::minimapCommand(Creature &creature, std::string_view)
       }
       else
       {
-        minimap += Room::base_rooms[world.terrain[x][y].type].color_code;
-        minimap.push_back(Room::base_rooms[world.terrain[x][y].type].symbol);
+        int tile_x = x < 0 ? x + world.getWidth() : x % world.getWidth();
+        int tile_y = y < 0 ? y + world.getHeight() : y % world.getHeight();
+        minimap += Room::base_rooms[world.terrain[tile_x][tile_y].type].color_code;
+        minimap.push_back(Room::base_rooms[world.terrain[tile_x][tile_y].type].symbol);
       }
     }
     minimap += "\r\n";
