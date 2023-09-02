@@ -2,6 +2,8 @@
 
 A C++ MUD server inspired by the classic 1990 MUD "Shattered World"
 
+![Screenshot of Fractured Lands MOTD](fractured-lands.png)
+
 # Build Instructions
 
 Fractured Lands relies on epoll, and as such, can only be built on Linux
