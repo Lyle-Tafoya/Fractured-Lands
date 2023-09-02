@@ -37,12 +37,20 @@ public:
   const std::string &getPassword() const;
   const std::string &getName() const;
   const std::string &getPrompt() const;
+  const std::string &getTitle() const;
+  int32_t getWizardLevel() const;
+  bool getBountyStatus() const;
+  bool getPlayerKillerStatus() const;
   const Creature *getBody() const;
 
   void setColorEnabled(bool color_enabled = true);
   void setVerbose(bool verbose = true);
   void setPassword(std::string_view password);
   void setPrompt(std::string_view prompt);
+  void setWizardLevel(int32_t wizardLevel);
+  void setBountyStatus(bool isBountied);
+  void setPlayerKillerStatus(bool isPlayerKiller);
+  void setTitle(std::string_view title);
 
   void enterWorld();
   void receiveMessage(const std::string &message) const;
@@ -81,7 +89,7 @@ private:
   std::string password;
   std::string prompt = "|K[|nHP=%c|n/|G%H |nSP=%C|n/|G%S|K]";
   std::unordered_map<std::string,std::string> aliases;
-  uint32_t wizardLevel = 0;
+  int32_t wizardLevel = 0;
   bool isBountied = false;
   bool isPlayerKiller = false;
 

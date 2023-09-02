@@ -132,6 +132,26 @@ const std::string &Player::getPassword() const
   return password;
 }
 
+const std::string &Player::getTitle() const
+{
+  return title;
+}
+
+int32_t Player::getWizardLevel() const
+{
+  return wizardLevel;
+}
+
+bool Player::getBountyStatus() const
+{
+  return isBountied;
+}
+
+bool Player::getPlayerKillerStatus() const
+{
+  return isPlayerKiller;
+}
+
 bool Player::getVerbose() const
 {
   return verbose;
@@ -140,6 +160,26 @@ bool Player::getVerbose() const
 void Player::setColorEnabled(bool enabled)
 {
   color_enabled = enabled;
+}
+
+void Player::setWizardLevel(int32_t wizardLevel)
+{
+  this->wizardLevel = wizardLevel;
+}
+
+void Player::setBountyStatus(bool isBountied)
+{
+  this->isBountied = isBountied;
+}
+
+void Player::setPlayerKillerStatus(bool isPlayerKiller)
+{
+  this->isPlayerKiller = isPlayerKiller;
+}
+
+void Player::setTitle(std::string_view title)
+{
+  this->title = title;
 }
 
 void Player::showPrompt() const

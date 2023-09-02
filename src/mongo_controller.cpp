@@ -65,8 +65,12 @@ bsoncxx::document::value to_document(const Player &player)
     << "creature_id" << player.getBody()->getId()
     << "password" << player.getPassword()
     << "prompt" << player.getPrompt()
+    << "title" << player.getTitle()
+    << "wizard_level" << player.getWizardLevel()
     << "color" << player.getColorEnabled()
     << "verbose" << player.getVerbose()
+    << "is_bountied" << player.getBountyStatus()
+    << "is_player_killer" << player.getPlayerKillerStatus()
     << bsoncxx::builder::stream::finalize
   );
 }
@@ -177,6 +181,10 @@ bool DatabaseController::readPlayer(std::string_view name, Player &player, Creat
   player.setPrompt(document_view["prompt"].get_string());
   player.setColorEnabled(document_view["color"].get_bool());
   player.setVerbose(document_view["verbose"].get_bool());
+  player.setWizardLevel(document_view["wizard_level"].get_int32());
+  player.setBountyStatus(document_view["is_bountied"].get_bool());
+  player.setPlayerKillerStatus(document_view["is_player_killer"].get_bool());
+  player.setTitle(document_view["title"].get_string());
 
   std::string creature_id(document_view["creature_id"].get_string());
   return readCreature(creature_id, body);
