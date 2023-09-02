@@ -363,9 +363,9 @@ Room *World::generateRoomInfo(uint64_t room_id)
     room.exits.emplace_front("west", flattenCoordinates({tmp, coordinates.y, std::max(terrain[tmp][coordinates.y].height, sea_level), coordinates.w}));
     tmp = (coordinates.x+1) % width;
     room.exits.emplace_front("east", flattenCoordinates({tmp, coordinates.y, std::max(terrain[tmp][coordinates.y].height, sea_level), coordinates.w}));
-    tmp = (coordinates.y-1) % length;
-    room.exits.emplace_front("south", flattenCoordinates({coordinates.x, tmp, std::max(terrain[coordinates.x][tmp].height, sea_level), coordinates.w}));
     tmp = (coordinates.y+1) % length;
+    room.exits.emplace_front("south", flattenCoordinates({coordinates.x, tmp, std::max(terrain[coordinates.x][tmp].height, sea_level), coordinates.w}));
+    tmp = (coordinates.y-1) % length;
     room.exits.emplace_front("north", flattenCoordinates({coordinates.x, tmp, std::max(terrain[coordinates.x][tmp].height, sea_level), coordinates.w}));
     if(terrain_type == FOREST || terrain_type == JUNGLE)
     {
@@ -398,12 +398,12 @@ Room *World::generateRoomInfo(uint64_t room_id)
     {
       room.exits.emplace_front("east", flattenCoordinates({tmp, coordinates.y, coordinates.z, coordinates.w}));
     }
-    tmp = (coordinates.y-1) % length;
+    tmp = (coordinates.y+1) % length;
     if(coordinates.z >= terrain[coordinates.x][tmp].height)
     {
       room.exits.emplace_front("south", flattenCoordinates({coordinates.x, tmp, coordinates.z, coordinates.w}));
     }
-    tmp = (coordinates.y+1) % length;
+    tmp = (coordinates.y-1) % length;
     if(coordinates.z >= terrain[coordinates.x][tmp].height)
     {
       room.exits.emplace_front("north", flattenCoordinates({coordinates.x, tmp, coordinates.z, coordinates.w}));
